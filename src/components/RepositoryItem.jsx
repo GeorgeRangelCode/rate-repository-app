@@ -1,24 +1,27 @@
-import React from "react";
-import { View, Text } from "react-native";
+import React from "react"
+import { View, StyleSheet } from "react-native"
+import StyledText from "./StyledText"
 
 const RepositoryItem = (props) => {
   return (
-    <View
-      key={props.repo.id}
-      style={{ padding: 20, paddingBottom: 5, paddingTop: 5 }}
-    >
-      <Text style={{ fontWeight: "bold", marginBottom: 5 }}>
-        Id: {props.repo.id}
-      </Text>
-      <Text>FullName: {props.repo.fullName}</Text>
-      <Text>Description: {props.repo.description}</Text>
-      <Text>Language: {props.repo.language}</Text>
-      <Text>Starts: {props.repo.stargazerCount}</Text>
-      <Text>Forks: {props.repo.forksCount}</Text>
-      <Text>Review: {props.repo.reviewCount}</Text>
-      <Text>Rating: {props.repo.ratingAverage}</Text>
+    <View key={props.id} style={styles.container}>
+      <StyledText fontSize='subheading' fontWeight='bold'>{props.fullName}</StyledText>
+      <StyledText>{props.description}</StyledText>
+      <StyledText>{props.language}</StyledText>
+      <StyledText>Starts: {props.stargazerCount}</StyledText>
+      <StyledText>Forks: {props.forksCount}</StyledText>
+      <StyledText>Review: {props.reviewCount}</StyledText>
+      <StyledText>Rating: {props.ratingAverage}</StyledText>
     </View>
-  );
-};
+  )
+}
 
-export default RepositoryItem;
+const styles = StyleSheet.create({
+  container: {
+    padding: 20, 
+    paddingBottom: 5,
+    paddingTop: 5
+  }
+})
+
+export default RepositoryItem

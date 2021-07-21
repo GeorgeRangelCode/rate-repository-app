@@ -42,7 +42,6 @@ const AppBarTab = ({ children, to }) => {
   )
 }
 
-const getRouteProps = ""
 
 const AppBar = () => {
   return (

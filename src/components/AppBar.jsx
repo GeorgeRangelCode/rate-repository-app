@@ -42,7 +42,6 @@ const AppBarTab = ({ children, to }) => {
   )
 }
 
-
 const AppBar = () => {
   return (
     <View style={styles.container}>

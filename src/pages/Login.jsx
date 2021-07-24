@@ -1,52 +1,63 @@
-import React from 'react'
-import { Formik, useField } from 'formik'
-import {  Button, View, StyleSheet } from 'react-native'
-import StyledTextInput from '../components/StyledTextInput'
+import React from "react";
+import { Formik, useField } from "formik";
+import { Button, View, StyleSheet } from "react-native";
+import StyledTextInput from "../components/StyledTextInput";
+import StyledText from "../components/StyledText";
+import { loginValidationSchema } from "../validationSchemas/login";
 
 const initialValues = {
-  email: '',
-  password: '',
-}
+  email: "",
+  password: "",
+};
 
 const styles = StyleSheet.create({
+  error: {
+    color: "red",
+    fontSize: 12,
+    marginBottom: 20,
+    marginTop: -5,
+  },
   form: {
-    margin: 12
-  }
-})
+    margin: 12,
+  },
+});
 
 const FormikInputValue = ({ name, ...props }) => {
-  const [field, meta, helpers] = useField(name)
+  const [field, meta, helpers] = useField(name);
 
   return (
-    <StyledTextInput
-      value={field.value}
-      onChangeText={value => helpers.setValue(value)}
-      {...props}
-    />
-  )
-}
+    <>
+      <StyledTextInput
+        error={meta.error}
+        value={field.value}
+        onChangeText={(value) => helpers.setValue(value)}
+        {...props}
+      />
+      {meta.error && <StyledText style={styles.error}>{meta.error}</StyledText>}
+    </>
+  );
+};
 
-export default function LogInPage () {
+export default function LogInPage() {
   return (
-    <Formik initialValues={initialValues} onSubmit={values => console.log(values)}>
+    <Formik
+      validationSchema={loginValidationSchema}
+      initialValues={initialValues}
+      onSubmit={(values) => console.log(values)}
+    >
       {({ handleSubmit }) => {
         return (
           <View style={styles.form}>
+            <FormikInputValue name="email" placeholder="E-mail" />
             <FormikInputValue
-              name="email"
-              placeholder='E-mail' 
-            />
-            <FormikInputValue 
               name="password"
-              placeholder='Password'
+              placeholder="Password"
               secureTextEntry
             />
-            <Button onPress={handleSubmit} title='Log In' />
+            <Button onPress={handleSubmit} title="Log In" />
           </View>
-        )
-      }}  
+        );
+      }}
     </Formik>
-  )
+  );
 }
-
-
